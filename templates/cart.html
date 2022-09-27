@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container card shadow-lg mt-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">S.NO</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cart in cart.cart_items.all  %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <th>
+                            <a href="{% url 'remove' cart.uid %}" class="btn btn-danger">
+                                <i class="fa-solid fa-trash-can"></i>
+                              </a>
+                        </th>
+                        <td><img src="/media/{{cart.pizza.pizza_img}}" alt="" style="height: 80px;"></td>
+                        <td>{{cart.pizza.pizza_name}}</td>
+                        <td>@{{cart.pizza.price}}/-</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                {% endfor %}
+                    <tr>
+                        <th scope="row">
+
+                        </th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <b>Grand Total:</b>
+                            <br>
+                            {% comment %} <h5><span class="badge bg-secondary">@{{cart.get_total}}/-</span></h5> {% endcomment %}
+                            <a href="{{payment_url}}" class="btn btn-success">Pay Now @{{cart.get_total}}</a>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

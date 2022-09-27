@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container">
+        <h2 class="text-org mt-2">Search Result:</h2>
+        {% if result|length < 1 %}
+            <div class="alert alert-danger">
+                <strong>Your search result not in list.</strong>
+            </div>
+        {% endif %}
+        {% for result in result %}
+        <div class="col-md-3 mt-3">
+            <div class="card shadow-lg bg-light" style="width: 19rem;">
+                <img src="/media/{{result.pizza_img}}" alt="" class="card-img-top" style=height:200px;>
+            </div>
+
+            <div class="card-body border" style="width: 19rem;">
+                <h5 class="card-title text-org">
+                    {{result.pizza_name|upper}}
+                </h5>
+                <strong class="cart-text text-org">
+                    Price: @{{result.price}}/-
+                </strong>
+                <div class="mt-1">
+                    <strong class="cart-text text-org">
+                        Category: <span class="badge bg-secondary">{{result.category}}</span></h3>
+                    </strong>
+                </div>
+                <div class="mt-2">
+                    <a href="{% url 'cart' result.uid %}" class="btn btn-success">
+                        cart <i class="fa-solid fa-cart-shopping">
+                        </i>
+                    </a>
+                    <a href="" class="btn btn-primary">20% Discount</a>
+                </div>
+            </div>
+        </div>
+           {% endfor %}
+        </div>
+    </div>
+{% endblock %}
